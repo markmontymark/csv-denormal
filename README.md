@@ -4,7 +4,15 @@ Denormalize csv lines
 
 ## Usage
 
-    git clone https://github.com/markmontymark/csv-denormal
-    cd csv-denormal
-    npm install # requires csv2 and through
-    node index.js < InputData.csv > ConvertedData.csv
+Meant to be passed to streams by `through`,
+
+    var through = require('through');
+    var csv = require('csv2');
+    var csv_denormal = require('csv-denormal');
+    
+    process.stdin
+    	.pipe(csv())
+    	.pipe(through(csv_denormal()))
+    	.pipe(process.stdout);
+
+See also [markmontymark/iedb-myco-data](https://github.com/markmontymark/iedb-myco-data)
