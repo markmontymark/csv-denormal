@@ -23,7 +23,8 @@
 var through = require('through');
 var csv = require('csv2');
 
-function denormalify(){
+module.exports = csv_denormal;
+function csv_denormal(){
 	var is_header_line = true;
 	var lineno = 0;
 	function pipe(chunk){
@@ -50,7 +51,3 @@ function denormalify(){
 	return pipe;
 }
 
-process.stdin
-	.pipe(csv())
-	.pipe(through(denormalify()))
-	.pipe(process.stdout);
